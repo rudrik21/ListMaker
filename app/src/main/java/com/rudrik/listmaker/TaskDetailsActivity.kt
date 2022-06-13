@@ -38,8 +38,15 @@ class TaskDetailsActivity : AppCompatActivity() {
     //  for initialization
     private fun init() {
         listDataManager = ListDataManager(this)
+
         tvTaskName.text = taskDetails.name
-        adpt = AdptListSelection(mutableListOf<TaskList>(taskDetails))
+
+        //  for converting List<String> to List<TaskList>
+        val list = mutableListOf<TaskList>()
+        taskDetails.tasksList.onEach {
+            list.add(TaskList(name = it))
+        }
+        adpt = AdptListSelection(list)
         reyclerView.adapter = adpt
     }
 
