@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvItemNumber"
+        android:textSize="14sp"
+        android:paddingBottom="4dp"
+        android:text="# 1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvItemName"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Mango"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:background="@color/material_dynamic_primary90"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</LinearLayout>
+

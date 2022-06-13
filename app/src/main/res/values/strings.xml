@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ListMaker</string>
+    <string name="dialog_create_list_title">What is the name of your list?</string>
+    <string name="dialog_create_list_positive">Create</string>
+</resources>
