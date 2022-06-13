@@ -7,16 +7,18 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import com.rudrik.listmaker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var adpt: AdptListSelection
     private lateinit var listDataManager: ListDataManager
+    private lateinit var bind: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        bind = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bind.root)
 
         init()
     }
@@ -26,8 +28,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         listDataManager = ListDataManager(this)
         val list = listDataManager.readList()
         adpt = AdptListSelection(list)
-        reyclerView.adapter = adpt
-        fabCreateList.setOnClickListener(this)
+        bind.contentMain.reyclerView.adapter = adpt
+        bind.fabCreateList.setOnClickListener(this)
     }
 
     //  for creating alert dialog
@@ -70,7 +72,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     //  on floating action button click
     override fun onClick(v: View?) {
         when (v) {
-            fabCreateList -> createListDialog()
+            bind.fabCreateList -> createListDialog()
         }
     }
 

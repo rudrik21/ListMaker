@@ -6,21 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.list_selection_view_holder.view.*
+import com.rudrik.listmaker.databinding.ListSelectionViewHolderBinding
 
 
 class AdptListSelection(
     private val tasks: MutableList<TaskList>
 ) : RecyclerView.Adapter<VHListSelection>() {   // for Implementing 'RecyclerView.Adapter'
 
+    private lateinit var bind: ListSelectionViewHolderBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHListSelection {
 
         //  for inflating view
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_selection_view_holder, parent, false)
+        bind = ListSelectionViewHolderBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
 
         //  for initializing Custom ViewHolder
-        return VHListSelection(view)
+        return VHListSelection(bind)
     }
 
     override fun onBindViewHolder(holder: VHListSelection, position: Int) {
@@ -41,15 +45,16 @@ class AdptListSelection(
 }
 
 //  for custom ViewHolder class, implementing 'RecyclerView.ViewHolder'
-class VHListSelection(var view: View) : RecyclerView.ViewHolder(view) {
+class VHListSelection(var viewBind: ListSelectionViewHolderBinding) :
+    RecyclerView.ViewHolder(viewBind.root) {
 
     //  on setting data to views
     fun bind(dataSet: Pair<Int, TaskList>) {
         val strNum = "# ${(dataSet.first) + 1}"
-        view.tvItemNumber.text = strNum
-        view.tvItemName.text = dataSet.second.name
+        viewBind.tvItemNumber.text = strNum
+        viewBind.tvItemName.text = dataSet.second.name
 
-        view.setOnClickListener(onItemClicked(dataSet))
+        viewBind.root.setOnClickListener(onItemClicked(dataSet))
     }
 
     //  on view click listener for specific data
@@ -58,7 +63,7 @@ class VHListSelection(var view: View) : RecyclerView.ViewHolder(view) {
             val msg =
                 ("CLICKED ${(dataSet.first) + 1} ${dataSet.second.name} -> " + dataSet.second.tasksList.toString())
 //            msg.snack(it)
-            showTaskDetails(view.context, dataSet.second)
+            showTaskDetails(viewBind.root.context, dataSet.second)
         }
     }
 
